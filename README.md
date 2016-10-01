@@ -1,2 +1,2 @@
 # Algorithms
-Classic examples in python
+Classic leetcode algorithms in python
