@@ -1,16 +1,17 @@
 class Node(object):
-    def __init__(self, value = None, next = None):
+
+    def __init__(self, value=None, next=None):
         self.value = value
         self.next = next
 
     def __str__(self):
-      return  '<Node: value: {}, next={}'.format(self.value, self.next)
+        return '<Node: value: {}, next={}'.format(self.value, self.next)
 
-    __repr__ =  __str__
-
+    __repr__ = __str__
 
 
 class LinkedList(object):
+
     def __init__(self, maxsize=None):
         self.maxsize = maxsize
         self.root = Node()
@@ -50,33 +51,32 @@ class LinkedList(object):
         for node in self.iter_node():
             yield node.value
 
-    def remove(self, value): #O(n)
+    def remove(self, value):  # O(n)
         prevnode = self.root
         curnode = self.root.next
         while prevnode is not self.tailnode:
             if curnode.value == value:
-              if curnode is self.tailnode:
-                self.tailnode = prevnode
-                del curnode
-                self.length -= 1
-                return value
-              else:
-                prevnode.next = curnode.next
-                del curnode
-                self.length -= 1
-                return value
+                if curnode is self.tailnode:
+                    self.tailnode = prevnode
+                    del curnode
+                    self.length -= 1
+                    return value
+                else:
+                    prevnode.next = curnode.next
+                    del curnode
+                    self.length -= 1
+                    return value
             prevnode = curnode
             curnode = curnode.next
         return -1
 
-    def find(self, value): #O(n)
+    def find(self, value):  # O(n)
         index = 0
         for node in self.iter_node():
             if node.value == value:
                 return index
             index += 1
         return -1
-
 
     def popleft(self):
         if self.root.next is None:
@@ -91,36 +91,35 @@ class LinkedList(object):
     def clear(self):
         for node in self.iter_node():
             del node
-        self.root.next= None
+        self.root.next = None
         self.length = 0
 
 
-
 def test_linked_list():
-  ll = LinkedList()
+    ll = LinkedList()
 
-  ll.append(0)
-  ll.append(1)
-  ll.append(2)
+    ll.append(0)
+    ll.append(1)
+    ll.append(2)
 
-  assert len(ll) == 3
-  assert ll.find(2) == 2
-  assert ll.find(3) == -1
+    assert len(ll) == 3
+    assert ll.find(2) == 2
+    assert ll.find(3) == -1
 
-  assert ll.remove(2) == 2
-  assert len(ll) == 2
-  assert ll.find(2) == -1
+    assert ll.remove(2) == 2
+    assert len(ll) == 2
+    assert ll.find(2) == -1
 
-  assert list(ll) == [0, 1]
+    assert list(ll) == [0, 1]
 
-  ll.appendleft(0)
-  assert list(ll) == [0, 0, 1]
-  assert len(ll) == 3
+    ll.appendleft(0)
+    assert list(ll) == [0, 0, 1]
+    assert len(ll) == 3
 
-  headvalue = ll.popleft()
-  assert headvalue == 0
-  assert len(ll) == 2
-  assert list(ll) == [0, 1]
+    headvalue = ll.popleft()
+    assert headvalue == 0
+    assert len(ll) == 2
+    assert list(ll) == [0, 1]
 
-  ll.clear()
-  assert len(ll) == 0
+    ll.clear()
+    assert len(ll) == 0

@@ -1,16 +1,18 @@
 class Node(object):
+
     def __init__(self, value=None, prev=None, next=None):
         self.value, self.prev, self.next = value, prev, next
 
     def __str__(self):
-      return  '<Node: value: {}, next={}, prev={}'\
-      .format(self.value, self.next, self.prev)
+        return  '<Node: value: {}, next={}, prev={}'\
+            .format(self.value, self.next, self.prev)
 
-    __repr__ =  __str__
+    __repr__ = __str__
 
 
 class DoubleLinkedList(object):
-    def __init__(self, maxsize = None):
+
+    def __init__(self, maxsize=None):
         self.maxsize = maxsize
         node = Node()
         node.next, node.prev = node, node
@@ -27,7 +29,7 @@ class DoubleLinkedList(object):
         return self.root.prev
 
     def append(self, value):
-        if self.maxsize is not None and len(self)>self.maxsize:
+        if self.maxsize is not None and len(self) > self.maxsize:
             raise Exception('full')
         node = Node(value=value)
         tailnode = self.tailnode()
@@ -40,11 +42,11 @@ class DoubleLinkedList(object):
         self.length += 1
 
     def appendleft(self, value):
-        if self.maxsize is not None and len(self)>self.maxsize:
+        if self.maxsize is not None and len(self) > self.maxsize:
             raise Exception('full')
         node = Node(value=value)
 
-        if self.root.next is self.root: #empty list
+        if self.root.next is self.root:  # empty list
             node.next = self.root
             node.prev = self.root
             self.root.prev = node
@@ -59,35 +61,35 @@ class DoubleLinkedList(object):
         self.length += 1
 
     def remove(self, node):
-     if node is self.root:
-         return
-     else:
-        node.prev.next = node.next
-        node.next.prev = node.prev
-     self.length -= 1
-     return node
+        if node is self.root:
+            return
+        else:
+            node.prev.next = node.next
+            node.next.prev = node.prev
+        self.length -= 1
+        return node
 
     def iter_node(self):
-     if self.root.next is self.root:
-         return
-     curnode = self.root.next
-     while curnode.next is not self.root:
-         yield curnode
-         curnode = curnode.next
-     yield curnode
+        if self.root.next is self.root:
+            return
+        curnode = self.root.next
+        while curnode.next is not self.root:
+            yield curnode
+            curnode = curnode.next
+        yield curnode
 
     def __iter__(self):
-     for node in self.iter_node():
-         yield node.value
+        for node in self.iter_node():
+            yield node.value
 
     def iter_node_reverse(self):
-     if self.root.prev is self.root:
-         return
-     curnode = self.root.prev
-     while curnode.prev is not self.root:
-         yield curnode
-         curnode = curnode.prev
-     yield curnode
+        if self.root.prev is self.root:
+            return
+        curnode = self.root.prev
+        while curnode.prev is not self.root:
+            yield curnode
+            curnode = curnode.prev
+        yield curnode
 
 
 def test_double_linked_list():

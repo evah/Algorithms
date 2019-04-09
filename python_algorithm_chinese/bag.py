@@ -1,7 +1,7 @@
 class Bag(object):
 
     def __init__(self, maxsize=10):
-        self.maxsize= maxsize
+        self.maxsize = maxsize
         self._items = list()
 
     def add(self, item):
@@ -19,9 +19,9 @@ class Bag(object):
         for item in self._items:
             yield item
 
+
 def test_bag():
     bag = Bag()
-
 
     bag.add(1)
     bag.add(2)

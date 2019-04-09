@@ -1,7 +1,8 @@
 
 class Array(object):
-    def __init__(self, size = 32):
-        self._size= size
+
+    def __init__(self, size=32):
+        self._size = size
         self._items = [None] * size
 
     def __getitem__(self, index):
@@ -23,9 +24,9 @@ class Array(object):
 
 
 def test_array():
-    size=10
+    size = 10
     a = Array(size)
-    a[0]=1
+    a[0] = 1
     assert a[0] == 1
 
     a.clear()

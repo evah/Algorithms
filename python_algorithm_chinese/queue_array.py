@@ -1,7 +1,8 @@
 
 class Array(object):
-    def __init__(self, size = 32):
-        self._size= size
+
+    def __init__(self, size=32):
+        self._size = size
         self._items = [None] * size
 
     def __getitem__(self, index):
@@ -21,13 +22,17 @@ class Array(object):
         for item in self._items:
             yield item
 
+
 class FullError(Exception):
     pass
+
 
 class EmptyError(Exception):
     pass
 
+
 class ArrayQueue(object):
+
     def __init__(self, maxsize):
         self.maxsize = maxsize
         self.array = Array(maxsize)
