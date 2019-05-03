@@ -51,7 +51,7 @@ class MaxHeap(object):
         if self._count <= 0:
             raise Exception('empty')
         value = self._elements[0]
-        self._count = 1
+        self._count -= 1
         self._elements[0] = self._elements[self._count]
         self._siftdown(0)
         return value
@@ -70,3 +70,36 @@ class MaxHeap(object):
         if largest != ndx:
             self._elements[ndx], self._elements[largest] = self._elements[largest], self._elements[ndx]
             self._siftdown(largest)
+
+
+def heapsort_reverse(array):
+    length = len(array)
+    maxheap = MaxHeap(length)
+    for i in array:
+        maxheap.add(i)
+    res = []
+    for i in range(length):
+        res.append(maxheap.extract())
+    return res
+
+
+def test_heapsort_reverse():
+    import random
+    l = list(range(10))
+    random.shuffle(l)
+    assert heapsort_reverse(l) == sorted(l, reverse=True)
+
+
+def heapsort_use_heapq(iterable):
+    from heapq import heappush, heappop
+    items = []
+    for value in iterable:
+        heappush(items, value)
+    return [heappop(items) for i in range(len(items))]
+
+
+def test_heapsort_use_heapq():
+    import random
+    l = list(range(10))
+    random.shuffle(l)
+    assert heapsort_use_heapq(l) == sorted(l)
