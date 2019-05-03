@@ -45,6 +45,11 @@ class BinTree(object):
             self.postorder_trav(subtree.right)
             print(subtree.data)
 
+    def reverse(self, subtree):
+        if subtree is not None:
+            subtree.left, subtree.right = subtree.right, subtree.left
+            self.reverse(subtree.left)
+            self.reverse(subtree.right)
 
 node_list = [
     {'data': 'A', 'left': 'B', 'right': 'C', 'is_root': True},
@@ -67,3 +72,7 @@ print("inorder travel:")
 btree.inorder_trav(btree.root)
 print("postorder travel:")
 btree.postorder_trav(btree.root)
+
+btree.reverse(btree.root)
+print('====反转之后的结果=====')
+btree.preorder_trav(btree.root)
